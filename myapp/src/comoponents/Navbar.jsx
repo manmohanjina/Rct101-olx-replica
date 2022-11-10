@@ -151,7 +151,7 @@ export default function Navbar(){
 
 
    </Box>
-   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Car</Text>
+   <Button as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" ><Link to='/cars' >Cars</Link></Button>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Motar Cylcle</Text>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Mobile Phone</Text>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Sale:House&appartment</Text>
