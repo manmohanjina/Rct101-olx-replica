@@ -8,26 +8,29 @@ export default function Statemangement({children}){
     const intobj={
         isloading:false,
         wrong:null,
+        wrong1:null,
         isAuth:false,
-        isError:false,
+        iserror:false,
         data:[],
         cardata:[],
-        singledata:[]
+        singledata:[],
+        bikedata:[],
+        mobiledata:[]
     }
     const reducer=(state,action)=>{
 
         switch(action.type){
           case "loginfail":
-          return  {...state,isloading:0 ,wrong:true,isAuth:0,isError:true}
+          return  {...state,isloading:false ,wrong:true,wrong1:true,isAuth:false,iserror:true}
         
           case "loginsuccess"
-          :return {...state,isloading:false,wrong:true,isAuth:true,isError:false,data:action.payload}
+          :return {...state,isloading:false,wrong:false,isAuth:true,isError:false,data:action.payload}
 
           case "start":
-            return {...state,isloading:true,wrong:true,isAuth:false,isError:false}
+            return {...state,isloading:true,isAuth:false,isError:false}
 
             case "finish":
-                return {...state, isloading:false,isError:false,data:action.payload }
+                return {...state, isloading:false,iserror:false,data:action.payload }
 
                 case "reset":
                     return {...state ,isError:false, wrong:false}
@@ -37,6 +40,15 @@ export default function Statemangement({children}){
 
                         case "singleuserdata":
                             return {...state,singledata:action.payload,singledatastatus:true}
+
+                            case "bikedata":
+                                return {...state,bikedata:action.payload,bikedatastatus:true}
+
+                                case "mobiledata":
+                                    return {...state,mobiledata:action.payload,mobiledatastatus:true}
+
+                                    case "reset":
+                                        return{...state, wrong:false,wrong1:true}
         }
         
     }

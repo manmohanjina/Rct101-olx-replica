@@ -1,3 +1,4 @@
+import { Container,Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -12,10 +13,19 @@ const {state,dispatch}=useContext(Appcontext)
     }
 
     useEffect(()=>{
+        dispatch({typr:"start"})
 getdata().then((res)=>{
 dispatch({type:"singleuserdata",payload:res})
+dispatch({type:"finish"})
+}).catch((error)=>{
+
+    dispatch({type:"loginfail"})
 })
     },[])
 
-    return<h1>single data Page</h1>
+    
+
+   return <Container mt='30px' h='400px' bg='#E6FFFA' >
+<Box></Box>
+   </Container>
 }

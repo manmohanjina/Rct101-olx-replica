@@ -10,7 +10,7 @@ import {Grid,Avatar, Box,Container,Flex,Spacer,Text,Wrap,WrapItemm,Stack ,Select
   MenuDivider,
   Heading,} from "@chakra-ui/react"
 import {EmailIcon,ChevronDownIcon} from "@chakra-ui/icons"
-import {Link}from "react-router-dom"
+import {Link, Navigate}from "react-router-dom"
 
 export default function Navbar(){
 
@@ -19,7 +19,7 @@ export default function Navbar(){
       <Box    w='60%' h='40px' pt="20px" m='auto' >
 
       <Flex gap='2px' >
-  <Avatar w='100px'  h='40px' mt="10px"   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uUiJ-LmS09iGZsWQOv7oPFwIUSLQK3HLkQ&usqp=CAU" />
+  <Avatar w='100px'  h='40px' mt="10px"    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uUiJ-LmS09iGZsWQOv7oPFwIUSLQK3HLkQ&usqp=CAU"   ></Avatar>
  <Spacer/>
  <Select placeholder='Select option'>
   <option value='option1'>Option 1</option>
@@ -151,9 +151,9 @@ export default function Navbar(){
 
 
    </Box>
-   <Button as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" ><Link to='/cars' >Cars</Link></Button>
-   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Motar Cylcle</Text>
-   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Mobile Phone</Text>
+   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" ><Link to='/cars' >Cars</Link></Text>
+   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" ><Link to='/bike'>Motar Cylcle</Link></Text>
+   <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" ><Link to='/mobile' >Mobile Phone</Link></Text>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Sale:House&appartment</Text>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Olx(renew)Mobile</Text>
    <Text as='b' m="auto"     _hover={{ bg: 'gray.400' }}  mt="10px" >Scooter</Text>

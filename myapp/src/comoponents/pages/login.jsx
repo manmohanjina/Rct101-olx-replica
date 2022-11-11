@@ -1,4 +1,4 @@
-import {Text,Divider,Button,Container, Input,Box, useEditable, useConst} from "@chakra-ui/react"
+import {AlertIcon,Alert,Text,Divider,Button,Container, Input,Box, useEditable, useConst,CircularProgress} from "@chakra-ui/react"
 import { useContext, useRef } from "react"
 import { useState } from "react"
 import { useEffect } from "react"
@@ -23,15 +23,18 @@ export default function Login(){
         dispatch({type:"start"})
         GetRes().then((res)=>{
             
-           
-             if(res.token) dispatch({type:"loginsuccess"})
-             else {
-               dispatch({type:"loginfail"})
-                
+        
+             if(res.token){
+                dispatch({type:"loginsuccess"})
+             } 
+             else{
+                dispatch({type:"loginfail"})//true
              }
+           
            dispatch({type:"finish"})
         }).catch((error)=>{
-            dispatch({type:"finish"})
+            console.log("efjakl");
+            dispatch({type:"loginfail"})
         })
       
       
@@ -56,20 +59,39 @@ export default function Login(){
 
 
 
-    if(state.isAuth){
-        return <Navigate to='/' />
+    // if(state.isAuth){
+    //     return <Navigate to='/' />
+    // }
+    if(state.wrong&&state.wrong1){
+       const id= setTimeout(()=>{ 
+            dispatch({type:"reset"})
+            if(id){
+                clearTimeout(id)
+            }
+         
+           
+        },3000)
+       
+        return <Alert status='error'>
+            <AlertIcon />
+            Please Enter Correct PassWord or Email
+      </Alert>
     }
+   
 
  
-   
+
+
+ 
+ 
 
     return <>
     <Container>
         <Box  p={3} m={4} mt="100px" display={"flex"} flexDirection="column" bg="red.100" borderRadius={40} >
-            <Text p="20px"  as='b' >{state.wrong==true?"Login to continue":"wrong Password"}</Text>
+            <Text p="20px"  as='b' >{state.wrong==true?"wrong Password":null}</Text>
 <Box mt={4} ><Input name='email' value={logindet.email} onChange={handelChange} bg='white' placeholder="Enter Email"  ></Input></Box>
 <Box mt={4} ><Input name='password' value={logindet.password} onChange={handelChange}  bg='white' placeholder="Enter PassWord"  ></Input></Box>
-<Button disabled={state.isloading==true} borderRadius={40} mt="20px" onClick={handleSubmit} >Login</Button>
+<Button  borderRadius={40} mt="20px" onClick={handleSubmit} >{state.isloading?<CircularProgress isIndeterminate color='green.300' />:"Login"}</Button>
 <Divider/>
         </Box>
     </Container>
