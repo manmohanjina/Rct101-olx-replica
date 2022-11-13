@@ -30,7 +30,7 @@ return <>
 
    
    
-   {  state.mobiledata.map((elm)=>
+   {  state.mobiledata&&state.mobiledata.map((elm)=>
   
    <Box key={elm.id} > 
    <Image src={elm.image} width='300px' h='300px' ></Image>

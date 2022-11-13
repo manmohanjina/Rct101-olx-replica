@@ -11,8 +11,22 @@ import {Grid,Avatar, Box,Container,Flex,Spacer,Text,Wrap,WrapItemm,Stack ,Select
   Heading,} from "@chakra-ui/react"
 import {EmailIcon,ChevronDownIcon} from "@chakra-ui/icons"
 import {Link, Navigate}from "react-router-dom"
+import { Appcontext } from "./Statemange"
+import { useContext } from "react"
 
 export default function Navbar(){
+const {state,dispatch,loginstate,setloginstate}=useContext(Appcontext)
+
+const handelChange=(e)=>{
+  const x=state.alldata.filter((elm)=>{
+    return elm.category==e.target.value
+  })
+  
+ if(x!=""){
+  dispatch({type:"finish",payload:x})
+ }
+}
+
 
      return <>
      <Box  w="full" h='100px' bg='#E2E8F0'  >
@@ -21,13 +35,14 @@ export default function Navbar(){
       <Flex gap='2px' >
   <Avatar w='100px'  h='40px' mt="10px"    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uUiJ-LmS09iGZsWQOv7oPFwIUSLQK3HLkQ&usqp=CAU"   ></Avatar>
  <Spacer/>
+<Link to='/'>Home</Link>
  <Select placeholder='Select option'>
   <option value='option1'>Option 1</option>
   <option value='option2'>Option 2</option>
   <option value='option3'>Option 3</option>
 </Select>
 <Spacer/>
-<Input bg='white' pl='10px' />
+<Input bg='white' pl='10px' onChange={handelChange} />
 <Spacer/>
 <Select bg='teal' placeholder="English" ></Select>
 <Spacer/>
@@ -40,6 +55,11 @@ export default function Navbar(){
   <Button pl='60px' leftIcon={<EmailIcon />}  variant='solid'>
    Sell
   </Button>
+  <Spacer/>
+{loginstate==false?true:null}
+  <Spacer/>
+  <Spacer/>
+  {loginstate?<Button mr='10px' onClick={()=>setloginstate(false)} >LogOut</Button>:<Button>  <Link to='/login' >Login</Link></Button>}
   <Spacer/>
   </Flex>
       </Box>
@@ -145,8 +165,10 @@ export default function Navbar(){
    <MenuItem>Drivers&Taxi</MenuItem>
    <MenuItem>Health & Beauty</MenuItem>
   </GridItem>
+ 
 </Grid>
   </MenuList>
+
 </Menu>
 
 

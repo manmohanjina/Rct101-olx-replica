@@ -35,7 +35,7 @@ dispatch({type:"finish"})
 
         
         
-        {  state.bikedata.map((elm)=>
+        { state.bikedata&& state.bikedata.map((elm)=>
        
         <Box key={elm.id} > 
         <Image src={elm.image} width='300px' h='300px' ></Image>

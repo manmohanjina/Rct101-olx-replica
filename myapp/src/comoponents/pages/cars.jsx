@@ -13,7 +13,7 @@ export default function Cars(){
     const {state,dispatch}=useContext(Appcontext)
    
     async function GetCars(){
-        return fetch(`http://localhost:3001/random?_page=1&limit=10&category=Car`).then((res)=>res.json())
+        return fetch(`http://localhost:3001/random?category=Car`).then((res)=>res.json())
     }
 
     useEffect(()=>{
@@ -28,8 +28,6 @@ dispatch({type:"finish"})
 })
 
     },[])
-  console.log(state.isloading);
-
 
     return <>
     {
@@ -38,7 +36,7 @@ dispatch({type:"finish"})
 
         
         
-        {  state.cardata.map((elm)=>
+        {  state.cardata&&state.cardata.map((elm)=>
        
         <Box key={elm.id} > 
         <Image src={elm.image} width='300px' h='300px' ></Image>

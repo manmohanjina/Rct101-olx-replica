@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { useReducer } from "react";
 
 export  const Appcontext=createContext()
@@ -15,7 +15,8 @@ export default function Statemangement({children}){
         cardata:[],
         singledata:[],
         bikedata:[],
-        mobiledata:[]
+        mobiledata:[],
+        alldata:[]
     }
     const reducer=(state,action)=>{
 
@@ -27,10 +28,10 @@ export default function Statemangement({children}){
           :return {...state,isloading:false,wrong:false,isAuth:true,isError:false,data:action.payload}
 
           case "start":
-            return {...state,isloading:true,isAuth:false,isError:false}
+            return {...state,isloading:true,isError:false,isAuth:0}
 
             case "finish":
-                return {...state, isloading:false,iserror:false,data:action.payload }
+                return {...state, isloading:false,iserror:false,data:action.payload}
 
                 case "reset":
                     return {...state ,isError:false, wrong:false}
@@ -49,11 +50,15 @@ export default function Statemangement({children}){
 
                                     case "reset":
                                         return{...state, wrong:false,wrong1:true}
+
+                                        case "search":
+                                           return {...state,alldata:action.payload}
         }
         
     }
 
     const [state,dispatch]=useReducer(reducer,intobj)
+    const [loginstate,setloginstate]=useState(false)
 
-    return <Appcontext.Provider value={{state,dispatch}} >{children}</Appcontext.Provider>
+    return <Appcontext.Provider value={{state,dispatch,loginstate,setloginstate}} >{children}</Appcontext.Provider>
 }

@@ -6,8 +6,10 @@ import {Navigate} from "react-router-dom"
 import { Appcontext } from "../Statemange"
 export default function Login(){
  
-    const {state,dispatch}=useContext(Appcontext)
+    const {state,dispatch,loginstate,setloginstate}=useContext(Appcontext)
     
+
+
     const timerref=useRef()
     const [count,setCount]=useState(5)
  
@@ -26,6 +28,7 @@ export default function Login(){
         
              if(res.token){
                 dispatch({type:"loginsuccess"})
+                setloginstate(true)
              } 
              else{
                 dispatch({type:"loginfail"})//true
@@ -33,7 +36,7 @@ export default function Login(){
            
            dispatch({type:"finish"})
         }).catch((error)=>{
-            console.log("efjakl");
+            
             dispatch({type:"loginfail"})
         })
       
@@ -56,22 +59,18 @@ export default function Login(){
     }
 //wrong Password
 
-
-
-
-    // if(state.isAuth){
-    //     return <Navigate to='/' />
-    // }
+    if(loginstate){
+        return <Navigate to='/' />
+    }
     if(state.wrong&&state.wrong1){
        const id= setTimeout(()=>{ 
             dispatch({type:"reset"})
             if(id){
                 clearTimeout(id)
             }
-         
-           
+
         },3000)
-       
+
         return <Alert status='error'>
             <AlertIcon />
             Please Enter Correct PassWord or Email
